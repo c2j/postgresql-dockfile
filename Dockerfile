@@ -1,7 +1,7 @@
 FROM opensuse
 MAINTAINER c2j
 RUN zypper --non-interactive install git-core cmake gcc bison flex readline-devel zlib-devel libopenssl-devel
-RUN mkdir /src; cd /src; env GIT_SSL_NO_VERIFY=true git clone https://github.com/c2j/postgres.git; cd postgres; git checkout REL9_4_STABLE
+RUN mkdir /src; cd /src; env GIT_SSL_NO_VERIFY=true git clone https://github.com/postgres/postgres.git; cd postgres; git checkout REL9_5_STABLE
 ENV PG_HOME /opt/local/postgresql
 RUN cd /src/postgres; ./configure --prefix=$PG_HOME --enable-thread-safety --with-wal-blocksize=64 --with-wal-segsize=64 --with-blocksize=32 --with-segsize=2 --enable-debug --with-openssl --without-ldap --with-perl; make; make install
 
